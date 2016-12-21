@@ -64,7 +64,8 @@ cranPackages = c(
 		"ipred",
 		"prodlim",
 		"png",
-		"gplots"
+		"gplots",
+		"shiny"
 )
 
 for (package in cranPackages) {
@@ -203,6 +204,35 @@ for (package in bioconductorPackages) {
 }
 
 
+# Illumina annotation packages from bioconductor 
+illuminaAnnotationBioconductorPackages = c(
+		"illuminaHumanv1.db",
+		"illuminaHumanv2.db",
+		"illuminaHumanv3.db",
+		"illuminaHumanv4.db",
+		"illuminaMousev1.db",
+		"illuminaMousev1p1.db",
+		"illuminaMousev2.db",
+		"illuminaRatv1.db",
+		"org.Hs.eg.db",
+		"org.Mm.eg.db",
+		"org.Rn.eg.db",
+		"org.Cf.eg.db",
+		"org.Dm.eg.db", # needed by FruitFlyAgilent.db
+		"TxDb.Hsapiens.UCSC.hg38.knownGene",
+		"BSgenome.Hsapiens.UCSC.hg38",
+		"BSgenome.Cfamiliaris.UCSC.canFam2",
+		"BSgenome.Cfamiliaris.UCSC.canFam3",
+		"PolyPhen.Hsapiens.dbSNP131"
+)
+
+for (package in illuminaAnnotationBioconductorPackages) {
+	smart.install.packages(bioconductor.package=package, mirror=repo.bioc)
+	#library(package, character.only = TRUE)
+	#detach(paste("package:", package, sep = ""), character.only = TRUE, unload=TRUE)
+}
+
+
 
 # Non-repo packages
 nonRepoPackages = c(
@@ -232,7 +262,6 @@ for (package in nonRepoPackages) {
 
 
 
-
 # Illumina annotation packages 
 illuminaAnnotationPackages = c(
 		"ftp://ctan.uib.no/pub/bioconductor/2.7/data/annotation/src/contrib/illuminaMousev1BeadID.db_1.8.0.tar.gz",
@@ -247,34 +276,6 @@ illuminaAnnotationPackages = c(
 
 for (package in illuminaAnnotationPackages) {
 	smart.install.packages(url.package=package);
-	#library(package, character.only = TRUE)
-	#detach(paste("package:", package, sep = ""), character.only = TRUE, unload=TRUE)
-}
-
-
-# Illumina annotation packages from bioconductor 
-illuminaAnnotationBioconductorPackages = c(
-		"illuminaHumanv1.db",
-		"illuminaHumanv2.db",
-		"illuminaHumanv3.db",
-		"illuminaHumanv4.db",
-		"illuminaMousev1.db",
-		"illuminaMousev1p1.db",
-		"illuminaMousev2.db",
-		"illuminaRatv1.db",
-		"org.Hs.eg.db",
-		"org.Mm.eg.db",
-		"org.Rn.eg.db",
-		"org.Cf.eg.db",
-		"TxDb.Hsapiens.UCSC.hg38.knownGene",
-		"BSgenome.Hsapiens.UCSC.hg38",
-		"BSgenome.Cfamiliaris.UCSC.canFam2",
-		"BSgenome.Cfamiliaris.UCSC.canFam3",
-		"PolyPhen.Hsapiens.dbSNP131"
-)
-
-for (package in illuminaAnnotationBioconductorPackages) {
-	smart.install.packages(bioconductor.package=package, mirror=repo.bioc)
 	#library(package, character.only = TRUE)
 	#detach(paste("package:", package, sep = ""), character.only = TRUE, unload=TRUE)
 }

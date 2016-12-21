@@ -1,11 +1,11 @@
-# TOOL htseq-count.R: "Count aligned reads per genes with HTSeq" (Calculates how many reads in a BAM file map to each gene. If you would like to map reads against your own GTF files, please use the tool \"Count aligned reads per genes with HTSeq using own GTF\". This tool is based on the HTSeq package. In order to use the output in edgeR or DESeq, you need to select all samples and run the tool \"Utilities - Define NGS experiment\".)
+# TOOL htseq-count.R: "Count aligned reads per genes with HTSeq" (Calculates how many reads in a BAM file map to each gene. If you have stranded data, please read the description for strandedness options carefully. You can find more information also in the manual. This tool is based on the HTSeq package. In order to use the output count files for differential expression analysis in edgeR or DESeq, you need to select all the samples and run the tool \"Utilities - Define NGS experiment\".)
 # INPUT alignment.bam: "BAM alignment file" TYPE GENERIC
 # OUTPUT htseq-counts.tsv
 # OUTPUT OPTIONAL htseq-count-info.txt
-# PARAMETER organism: "Reference organism" TYPE [Arabidopsis_thaliana.TAIR10.32, Bos_taurus.UMD3.1.85, Canis_familiaris.BROADD2.67, Canis_familiaris.CanFam3.1.85, Drosophila_melanogaster.BDGP5.78, Drosophila_melanogaster.BDGP6.85, Felis_catus.Felis_catus_6.2.85, Gallus_gallus.Galgal4.85, Gasterosteus_aculeatus.BROADS1.85, Halorubrum_lacusprofundi_atcc_49239.ASM2220v1.32, Homo_sapiens.GRCh37.75, Homo_sapiens.GRCh38.85, Homo_sapiens.NCBI36.54, Medicago_truncatula.MedtrA17_4.0.32, Mus_musculus.GRCm38.85, Mus_musculus.NCBIM37.67, Oryza_sativa.IRGSP-1.0.32, Ovis_aries.Oar_v3.1.85, Populus_trichocarpa.JGI2.0.32, Rattus_norvegicus.RGSC3.4.69, Rattus_norvegicus.Rnor_5.0.79, Rattus_norvegicus.Rnor_6.0.85, Schizosaccharomyces_pombe.ASM294v2.32, Solanum_tuberosum.SolTub_3.0.32, Sus_scrofa.Sscrofa10.2.85, Vitis_vinifera.IGGP_12x.32, Yersinia_enterocolitica_subsp_palearctica_y11.ASM25317v1.32, Yersinia_pseudotuberculosis_ip_32953_gca_000834295.ASM83429v1.32] DEFAULT Homo_sapiens.GRCh38.85 (Which organism is your data from.)
+# PARAMETER organism: "Reference organism" TYPE [Arabidopsis_thaliana.TAIR10.32, Bos_taurus.UMD3.1.86, Canis_familiaris.BROADD2.67, Canis_familiaris.CanFam3.1.86, Drosophila_melanogaster.BDGP5.78, Drosophila_melanogaster.BDGP6.86, Felis_catus.Felis_catus_6.2.86, Gallus_gallus.Galgal4.85, Gallus_gallus.Gallus_gallus-5.0.86, Gasterosteus_aculeatus.BROADS1.86, Halorubrum_lacusprofundi_atcc_49239.ASM2220v1.32, Homo_sapiens.GRCh37.75, Homo_sapiens.GRCh38.86, Homo_sapiens.NCBI36.54, Medicago_truncatula.MedtrA17_4.0.32, Mus_musculus.GRCm38.86, Mus_musculus.NCBIM37.67, Oryza_sativa.IRGSP-1.0.32, Ovis_aries.Oar_v3.1.86, Populus_trichocarpa.JGI2.0.32, Rattus_norvegicus.RGSC3.4.69, Rattus_norvegicus.Rnor_5.0.79, Rattus_norvegicus.Rnor_6.0.86, Schizosaccharomyces_pombe.ASM294v2.32, Solanum_tuberosum.SolTub_3.0.32, Sus_scrofa.Sscrofa10.2.86, Vitis_vinifera.IGGP_12x.32, Yersinia_enterocolitica_subsp_palearctica_y11.ASM25317v1.32, Yersinia_pseudotuberculosis_ip_32953_gca_000834295.ASM83429v1.32] DEFAULT Homo_sapiens.GRCh38.86 (Which organism is your data from.)
 # PARAMETER chr: "Chromosome names in the BAM file look like" TYPE [chr1, 1] DEFAULT 1 (Chromosome names must match in the BAM file and in the reference annotation. Check your BAM and choose accordingly.)
 # PARAMETER paired: "Does the BAM file contain paired-end data" TYPE [yes, no] DEFAULT no (Does the alignment data contain paired end or single end reads?)
-# PARAMETER stranded: "Was the data produced with a strand-specific protocol" TYPE [yes, no, reverse] DEFAULT no (Select no if your data was not produced with a strand-specific RNA-seq protocol, so that a read is considered overlapping with a feature regardless of whether it is mapped to the same or the opposite strand as the feature. If you select yes, the read has to be mapped to the same strand as the feature.)
+# PARAMETER stranded: "Is the data stranded and how" TYPE [reverse:"\"reverse\" in HTSeq\: the second read of a pair should map to the same strand as the gene", yes:"\"yes\" in HTSeq\: the first read should map to the same strand as the gene", no:"\"no\" in HTSeq\: the data is unstranded"] DEFAULT no (If you select NO, a read will be counted for a gene regardless of which strand it maps to. If you select YES and you have single end data, the read has to map to the same strand as the gene. For paired end data, the first read of a pair has to map to the same strand as the gene, and the second read has to map to the opposite strand. If you select REVERSE and you have paired end data, the second read has to map to the same strand as the gene, and the first read has to map to the opposite strand. You should use REVERSE for paired end data produced for example with the Illumina TruSeq Stranded kit.)
 # PARAMETER OPTIONAL mode: "Mode to handle reads overlapping more than one feature" TYPE [union, intersection-strict, intersection-nonempty] DEFAULT union (How to deal with reads that overlap more than one gene or exon?)
 # PARAMETER OPTIONAL minaqual: "Minimum alignment quality" TYPE INTEGER FROM 0 TO 100 DEFAULT 10 (Skip all reads with alignment quality lower than the given minimum value.)
 # PARAMETER OPTIONAL feature.type: "Feature type to count" TYPE [exon, CDS] DEFAULT exon (Which feature type to use, all features of other type are ignored.)
@@ -19,7 +19,8 @@
 # 30.5.2013 EK changed the default for "add chromosomal coordinates" to no
 # 21.5.2014 EK updated to use HTSeq 0.6.1
 # 19.6.2014 AMS changed handling of GTFs
-# AMS 04.07.2014 New genome/gtf/index locations & names
+# 4.07.2014 AMS New genome/gtf/index locations & names
+# 22.9.2016 EK Clarified strandedness options
 
 # sort bam if the data is paired-end
 samtools.binary <- file.path(chipster.tools.path, "samtools", "samtools")
@@ -47,6 +48,7 @@ if(chr == "1"){
 	annotation.file <- paste("internal_chr.gtf")
 }
 
+
 htseq <- paste(htseq.binary, "-f bam -q -m", mode, "-s", stranded, "-a", minaqual, "-t", feature.type, "-i", id.attribute, bam, annotation.file, " > htseq-counts-out.txt")
 
 # run
@@ -56,7 +58,7 @@ system(htseq)
 system("head -n -5 htseq-counts-out.txt > htseq-counts.tsv")
 system("tail -n 5 htseq-counts-out.txt > htseq-count-info.txt")
 
-# bring in file to R environment for formating
+# bring in files to R environment for formating
 file <- c("htseq-counts.tsv")
 dat <- read.table(file, header=F, sep="\t")
 
@@ -68,6 +70,21 @@ if(print.coord == "no") {
 
 # write result table to output
 write.table(dat, file="htseq-counts.tsv", col.names=T, quote=F, sep="\t", row.names=F)
+
+# Add additional info lines about read totals to output
+file2 <- c("htseq-count-info.txt")
+dat2 <- read.table(file2, header=F, sep="\t")
+
+assigned <- sum(dat$count)
+notassigned <- sum(dat2[2])
+total <- assigned + notassigned
+
+line <- paste("\n")
+line <- paste(line, "not_counted\t", notassigned, "\n", sep ="")
+line <- paste(line, "counted\t", assigned, "\n", sep ="")
+line <- paste(line, "total\t", total, "\n", sep ="")
+
+write(line, "htseq-count-info.txt", append=TRUE)
 
 # Handle output names
 source(file.path(chipster.common.path, "tool-utils.R"))
@@ -85,3 +102,5 @@ outputnames[1,] <- c("htseq-counts.tsv", paste(basename, ".tsv", sep =""))
 write_output_definitions(outputnames)
 
 # EOF
+
+
