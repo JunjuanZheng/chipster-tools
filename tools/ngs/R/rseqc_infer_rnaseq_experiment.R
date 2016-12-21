@@ -3,7 +3,7 @@
 # INPUT OPTIONAL reads2.fq: "Read 2 FASTQ" TYPE GENERIC
 # OUTPUT experiment_data.txt
 # OUTPUT OPTIONAL inner_distance.pdf
-# PARAMETER organism: "Genome" TYPE ["FILES genomes/bed .bed”] DEFAULT "SYMLINK_TARGET genomes/bed/default .bed” (Genome or transcriptome that you would like to align your reads against.)
+# PARAMETER organism: "Genome" TYPE ["FILES genomes/bed .bed"] DEFAULT "SYMLINK_TARGET genomes/bed/default .bed" (Genome or transcriptome that you would like to align your reads against.)
 
 # check out if the file is compressed and if so unzip it
 source(file.path(chipster.common.path, "zip-utils.R"))

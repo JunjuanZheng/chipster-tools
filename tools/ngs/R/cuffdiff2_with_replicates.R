@@ -30,7 +30,7 @@
 # OUTPUT OPTIONAL tss_groups.count_tracking.tsv
 # OUTPUT OPTIONAL tss_groups.fpkm_tracking.tsv
 # OUTPUT OPTIONAL tss_groups.read_group_tracking.tsv
-# PARAMETER organism: "Reference organism" TYPE [other, "FILES genomes/gtf .gtf”] DEFAULT other (You can use own GTF file or one of those provided on the server.)
+# PARAMETER organism: "Reference organism" TYPE [other, "FILES genomes/gtf .gtf"] DEFAULT other (You can use own GTF file or one of those provided on the server.)
 # PARAMETER output.type: "Output type" TYPE [concise, complete] DEFAULT concise (Cuffdiff produces a large number of output files (over 20\). You can choose to see the complete output or just concise processed output.)
 # PARAMETER chr: "Chromosome names in my BAM file look like" TYPE [chr1, 1] DEFAULT 1 (Chromosome names must match in the BAM file and in the reference annotation. Check your BAM and choose accordingly.)
 # PARAMETER OPTIONAL fdr: "Allowed false discovery rate" TYPE DECIMAL FROM 0 TO 1 DEFAULT 0.05 (FDR-adjusted p-values (q-values\) are calculated. The concise output files include only those genes or transcripts which have a q-value lower than the given FDR. The value of the Significant-column is adjusted accordingly (yes/no\) in all output files.) 

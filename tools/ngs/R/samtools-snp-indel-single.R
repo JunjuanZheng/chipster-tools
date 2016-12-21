@@ -2,7 +2,7 @@
 # INPUT alignment{...}.bam: "Sorted BAM files" TYPE BAM 
 # INPUT OPTIONAL ownref.fa: "Reference sequence FASTA" TYPE GENERIC
 # OUTPUT variants.vcf
-# PARAMETER organism: "Reference sequence" TYPE [other, "FILES genomes/fasta .fa”] DEFAULT other (Reference sequence.)
+# PARAMETER organism: "Reference sequence" TYPE [other, "FILES genomes/fasta .fa"] DEFAULT other (Reference sequence.)
 # PARAMETER chr: "Chromosome names in my BAM file look like" TYPE [chr1, 1] DEFAULT 1 (Chromosome names must match in the BAM file and in the reference sequence. Check your BAM and choose accordingly. This only applies to provided reference genomes.)
 # PARAMETER ploidy: "Ploidy" TYPE [haploid, diploid] DEFAULT diploid (Ploidy.)
 # PARAMETER OPTIONAL mpileup.ui: "Call only SNPs, INDELs not considered" TYPE [yes, no] DEFAULT no (Do not perform INDEL calling.)

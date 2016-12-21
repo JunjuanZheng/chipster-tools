@@ -2,7 +2,7 @@
 # INPUT alignment.bam: "BAM alignment file" TYPE GENERIC
 # OUTPUT exon-counts.tsv
 # OUTPUT OPTIONAL exon-counts-info.txt
-# PARAMETER organism: "Reference organism" TYPE ["FILES genomes/dexseq .DEXSeq.gtf”] DEFAULT "SYMLINK_TARGET genomes/dexseq/default .DEXSeq.gtf” (Which organism is your data from.)
+# PARAMETER organism: "Reference organism" TYPE ["FILES genomes/dexseq .DEXSeq.gtf"] DEFAULT "SYMLINK_TARGET genomes/dexseq/default .DEXSeq.gtf" (Which organism is your data from.)
 # PARAMETER chr: "Chromosome names in the BAM file look like" TYPE [chr1, 1] DEFAULT 1 (Chromosome names must match in the BAM file and in the reference annotation. Check your BAM and choose accordingly.)
 # PARAMETER paired: "Does the BAM file contain paired-end data" TYPE [yes, no] DEFAULT no (Does the alignment data contain paired end or single end reads?)
 # PARAMETER stranded: "Was the data produced with a strand-specific protocol" TYPE [yes, no, reverse] DEFAULT no (Select no if your data was not produced with a strand-specific RNA-seq protocol, so that a read is considered overlapping with a feature regardless of whether it is mapped to the same or the opposite strand as the feature. If you select yes, the read has to be mapped to the same strand as the feature.)

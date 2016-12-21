@@ -2,7 +2,7 @@
 # INPUT alignment.bam: "BAM alignment file" TYPE GENERIC
 # OUTPUT htseq-counts.tsv
 # OUTPUT OPTIONAL htseq-count-info.txt
-# PARAMETER organism: "Reference organism" TYPE ["FILES genomes/gtf .gtf”] DEFAULT "SYMLINK_TARGET genomes/gtf/default .gtf” (Which organism is your data from.)
+# PARAMETER organism: "Reference organism" TYPE ["FILES genomes/gtf .gtf"] DEFAULT "SYMLINK_TARGET genomes/gtf/default .gtf" (Which organism is your data from.)
 # PARAMETER chr: "Chromosome names in the BAM file look like" TYPE [chr1, 1] DEFAULT 1 (Chromosome names must match in the BAM file and in the reference annotation. Check your BAM and choose accordingly.)
 # PARAMETER paired: "Does the BAM file contain paired-end data" TYPE [yes, no] DEFAULT no (Does the alignment data contain paired end or single end reads?)
 # PARAMETER stranded: "Is the data stranded and how" TYPE [reverse:"\"reverse\" in HTSeq\: the second read of a pair should map to the same strand as the gene", yes:"\"yes\" in HTSeq\: the first read should map to the same strand as the gene", no:"\"no\" in HTSeq\: the data is unstranded"] DEFAULT no (If you select NO, a read will be counted for a gene regardless of which strand it maps to. If you select YES and you have single end data, the read has to map to the same strand as the gene. For paired end data, the first read of a pair has to map to the same strand as the gene, and the second read has to map to the opposite strand. If you select REVERSE and you have paired end data, the second read has to map to the same strand as the gene, and the first read has to map to the opposite strand. You should use REVERSE for paired end data produced for example with the Illumina TruSeq Stranded kit.)

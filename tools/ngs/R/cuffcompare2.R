@@ -8,7 +8,7 @@
 # OUTPUT OPTIONAL cuffcmp.stats.txt
 # OUTPUT OPTIONAL cuffcmp.tracking.tsv
 # PARAMETER chr: "Chromosome names in my GTF files look like" TYPE [chr1, 1] DEFAULT 1 (If you are using the reference annotations provided in Chipster, check your GTF files and choose accordingly. This option is not used if you use your own reference GTF.)
-# PARAMETER OPTIONAL organism: "Reference organism" TYPE [other, "FILES genomes/gtf .gtf”] DEFAULT other (You can use own GTF file or one of those provided on the server.)
+# PARAMETER OPTIONAL organism: "Reference organism" TYPE [other, "FILES genomes/gtf .gtf"] DEFAULT other (You can use own GTF file or one of those provided on the server.)
 # PARAMETER OPTIONAL r: "Ignore non-overlapping reference transcripts" TYPE [yes, no] DEFAULT no (Ignore reference transcripts that are not overlapped by any transcript in any of the GTF files. Useful for ignoring annotated transcripts that are not present in your RNA-seq samples and thus adjusting the sensitivity calculation in the accuracy report.)
 
 # AMS 24.2.2014

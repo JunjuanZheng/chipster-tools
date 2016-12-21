@@ -5,7 +5,7 @@
 # OUTPUT OPTIONAL dexseq-exons.pdf: dexseq-exons.pdf
 # OUTPUT OPTIONAL dexseq-MAplot.pdf: dexseq-MAplot.pdf
 # OUTPUT OPTIONAL dexseq-dispersion-plot.pdf: dexseq-dispersion-plot.pdf
-# PARAMETER OPTIONAL organism: "Reference organism" TYPE ["FILES genomes/dexseq .DEXSeq.gtf”] DEFAULT "SYMLINK_TARGET genomes/dexseq/default .DEXSeq.gtf” (Which organism is your data from.)
+# PARAMETER OPTIONAL organism: "Reference organism" TYPE ["FILES genomes/dexseq .DEXSeq.gtf"] DEFAULT "SYMLINK_TARGET genomes/dexseq/default .DEXSeq.gtf" (Which organism is your data from.)
 # PARAMETER pvalue: "Threshold for adjusted p-value" TYPE DECIMAL FROM 0 TO 1 DEFAULT 0.05 (Threshold for BH adjusted p-values. If a gene has at least one exon below this p-value, all its exons will be included in the result list.)
 
 # 18.07.2013 JTT, Created
